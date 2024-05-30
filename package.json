@@ -1,0 +1,14 @@
+{
+  "name": "backend-project",
+  "version": "1.0.0",
+  "description": "A backend project with Hitesh Sis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Backend"
+  ],
+  "author": "Nihal Dubey",
+  "license": "ISC"
+}
