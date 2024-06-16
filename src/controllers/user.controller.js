@@ -104,7 +104,7 @@ const registerUser =  asyncHandler( async (req, res) => {
       if (!(username)){
         throw new apiError(400, "username is required")
       }
-      const user =  User.findOne({
+      const user =  await User.findOne({
        username
       })
 
@@ -115,7 +115,7 @@ const registerUser =  asyncHandler( async (req, res) => {
       // console.log(user);
       console.log(password);
 
-     const Password = await user.comparePassword()   
+     const Password = await user.comparePassword(password)   
 
     if(!Password){
       throw new apiError(401, "password is invalid")
