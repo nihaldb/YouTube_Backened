@@ -320,5 +320,6 @@ export {
     getPlaylistById,
     removeVideo,
     deletePlaylist,
-    addVideoToPlaylist
+    addVideoToPlaylist,
+    updatePlaylist
 }
