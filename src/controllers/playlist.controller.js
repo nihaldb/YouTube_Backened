@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Playlist } from "../models/playlist.model";
+import { Playlist } from "../models/playlist.model.js";
 import { apiError } from "../utils/apiErrors.js";
 import { apiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -11,7 +11,8 @@ const createPlaylist = asyncHandler(async (req, res) => {
   // check name and description is not empty
 
   const { name, description } = req.body;
-  const { user } = req.user;
+  const user = req.user;
+  // console.log(req.user)
   if (!name || !description) {
     throw new apiError(400, "name and description is required");
   }
@@ -305,5 +306,5 @@ export {
   removeVideo,
   deletePlaylist,
   addVideoToPlaylist,
-  updatePlaylist,
+  updatePlaylist
 };
