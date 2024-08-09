@@ -19,6 +19,6 @@ playRouter.route("/addVideo").post( addVideoToPlaylist )
 
 playRouter.route("/removeVideo").post( removeVideo )
 playRouter.route("/deletePlaylist").post(deletePlaylist)
-playRouter.route("updatePlaylist").post(updatePlaylist)
+playRouter.route("/updatePlaylist").post(updatePlaylist)
 
 export {playRouter}
