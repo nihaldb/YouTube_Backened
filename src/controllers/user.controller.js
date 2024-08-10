@@ -232,8 +232,8 @@ const changePassword = asyncHandler ( async (req, res )=> {
 
   const user = await User.findById(req.user?._id)
 
-  isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
-
+  const isPasswordCorrect = await user.comparePassword(oldPassword)
+  //  console.log(isPasswordCorrect)
   if(!isPasswordCorrect){
     throw new apiError(400, " Invalid password")
   }
@@ -249,7 +249,7 @@ const changePassword = asyncHandler ( async (req, res )=> {
 const getCurrentUser = asyncHandler (async (req, res)=>{
   return res
   .status(200)
-  .json(new apiResponse(200,req.user , "Current User fetched Successfully"))
+  .json(new apiResponse(200, req.user , "Current User fetched Successfully"))
 })
 
 const updateAccountDetails = asyncHandler(async (req, res) =>{
@@ -269,10 +269,11 @@ const updateAccountDetails = asyncHandler(async (req, res) =>{
     },
     {new : true}
   ).select("-password")
-
+  console.log(user);
+  
   return res
   .status(200)
-  .json(new apiResponse(200, "Accounts details updated successfully"))
+  .json(new apiResponse(200, user ,  "Accounts details updated successfully"))
 })
 
 const updateUserAvatar = asyncHandler(async (req, res) =>{
@@ -332,7 +333,9 @@ const updateUserCoverImage = asyncHandler(async (req, res) =>{
 })
 
 const getUserChannelProfile = asyncHandler(async (req,res) => {
-    const {username} = req.params
+    const username = req.param('username')
+    console.log(username);
+    
 
     if(!username?.trim()){
       throw new apiError(400, " Username is missing")
@@ -350,7 +353,7 @@ const getUserChannelProfile = asyncHandler(async (req,res) => {
         localField : "_id",
         foreignField : "channel",
         as : "subscribers"
-      }
+      } 
     },
     {
       $lookup : {
@@ -366,7 +369,7 @@ const getUserChannelProfile = asyncHandler(async (req,res) => {
           $size: "$subscribers"
         },
         channelsSubscribedToCount :{
-          $size: "$subscribesTo"
+          $size: "$subscribedTo"
         },
 
         isSubscribed: {
