@@ -140,3 +140,5 @@ const deleteTweet = asyncHandler(async (req, res) => {
     console.log(error, "Something went wrong");
   }
 });
+
+export { createTweet, getUserTweet, updateTweet, deleteTweet };
